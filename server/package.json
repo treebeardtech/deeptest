@@ -2,7 +2,7 @@
   "name": "@treebeardtech/deeptest",
   "version": "0.0.1",
   "main": "index.js",
-  "license": "Apache-2",
+  "license": "Apache-2.0",
   "scripts": {
     "lint:fix": "yarn prettier --write .",
     "lint": "prettier --check .",

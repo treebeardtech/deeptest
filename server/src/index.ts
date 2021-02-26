@@ -1,28 +1,28 @@
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
-import { User } from './entity/User'
+// import { User } from './entity/User'
 import * as express from 'express'
 const { ApolloServer, gql } = require('apollo-server-express')
 
-createConnection()
-  .then(async (connection) => {
-    console.log('Inserting a new user into the database...')
-    const user = new User()
+// createConnection()
+//   .then(async (connection) => {
+//     console.log('Inserting a new user into the database...')
+//     const user = new User()
 
-    user.firstName = 'Timber'
+//     user.firstName = 'Timber'
 
-    user.lastName = 'Saw'
-    user.age = 25
-    await connection.manager.save(user)
-    console.log('Saved a new user with id: ' + user.id)
+//     user.lastName = 'Saw'
+//     user.age = 25
+//     await connection.manager.save(user)
+//     console.log('Saved a new user with id: ' + user.id)
 
-    console.log('Loading users from the database...')
-    const users = await connection.manager.find(User)
-    console.log('Loaded users: ', users)
+//     console.log('Loading users from the database...')
+//     const users = await connection.manager.find(User)
+//     console.log('Loaded users: ', users)
 
-    console.log('Here you can setup and run express/koa/any other framework.')
-  })
-  .catch((error) => console.log(error))
+//     console.log('Here you can setup and run express/koa/any other framework.')
+//   })
+//   .catch((error) => console.log(error))
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -63,6 +63,10 @@ const typeDefs = gql`
     metadata: NodeMetaData!
     data: NodeData!
     history: [NodeMetaData]!
+  }
+
+  type Mutation {
+    createReview(x: String): String
   }
 `
 
@@ -106,20 +110,34 @@ const resolvers = {
   InnerData: {
     children: (x: any) => x.children,
   },
+  Mutation: {
+    createReview: (x: string) => {
+      console.log(x)
+      return "blah"
+    }
+  }
 }
 
 const startServer = async () => {
-  const server = new ApolloServer({ typeDefs, resolvers })
+  try {
 
-  await createConnection()
+    const server = new ApolloServer({ typeDefs, resolvers })
 
-  const app = express()
+    await createConnection()
 
-  server.applyMiddleware({ app })
+    const app = express()
 
-  app.listen({ port: 4000 }, () =>
+    server.applyMiddleware({ app })
+
+    app.listen({ port: 4000 }, () =>
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-  )
+    )
+  } catch (e) {
+    console.log(e)
+  }
 }
+ startServer()
 
-startServer()
+//  mutation createReview($a: String) {
+//   createReview(x: $a)
+// }
