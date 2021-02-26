@@ -8,9 +8,12 @@
     "lint": "prettier --check .",
     "start": "ts-node src/index.ts",
     "install-cli": "yarn global add file:$PWD",
-    "watch": "nodemon --watch src/*ts --watch src/**/*ts --exec 'yarn lint:fix && yarn start'"
+    "watch": "nodemon --watch src/*ts --watch src/**/*ts --exec 'yarn lint:fix && yarn start'",
+    "test": "jest"
   },
-  "bin": {"deeptest":"dist/cli.js"},
+  "bin": {
+    "deeptest": "dist/cli.js"
+  },
   "dependencies": {
     "apollo-server-express": "^2.21.0",
     "better-sqlite3": "^7.1.2",
@@ -21,8 +24,11 @@
   },
   "devDependencies": {
     "@types/graphql": "^14.5.0",
+    "@types/jest": "^26.0.20",
     "@types/node": "^8.0.29",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.5.2",
     "ts-node": "3.3.0",
     "typescript": "3.3.3333"
   }

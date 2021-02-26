@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite name="pytest" errors="0" failures="1" skipped="0" tests="7" time="14.107" timestamp="2021-02-26T12:06:14.616554" hostname="Work-MBP">
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_passing_then_no_failing_cell" time="7.000">
+            <failure message="AssertionError: assert None != None&#10; +  where None = NotebookResult(nb={'cells': [{'cell_type': 'markdown', 'id': 'theoretical-palestine', 'metadata': {}, 'source': '# def...'ipython3', 'nbconvert_exporter': 'python', 'file_extension': '.py'}}, 'nbformat': 4, 'nbformat_minor': 5}, error=None).error">self = &lt;tests.test_nb_run.TestNotebookRun object at 0x10d69e160&gt;
+testdir = &lt;Testdir local('/private/var/folders/9_/nhq0tlgs2lzgfkcvq0d76jrc0000gp/T/pytest-of-a/pytest-62/test_when_passing_then_no_failing_cell5')&gt;
+
+    def test_when_passing_then_no_failing_cell(self, testdir: Testdir):
+        write_nb(passing_nb, filename)
+
+        run = NotebookRun(filename)
+        res: NotebookResult = run.execute()
+
+&gt;       assert res.error != None
+E       AssertionError: assert None != None
+E        +  where None = NotebookResult(nb={'cells': [{'cell_type': 'markdown', 'id': 'theoretical-palestine', 'metadata': {}, 'source': '# def...'ipython3', 'nbconvert_exporter': 'python', 'file_extension': '.py'}}, 'nbformat': 4, 'nbformat_minor': 5}, error=None).error
+
+/Users/a/git/treebeardtech/nbmake/tests/test_nb_run.py:25: AssertionError</failure>
+        </testcase>
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_runs_then_cwd_is_nb_location" time="1.204" />
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_failing" time="1.183" />
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_allow_errors_then_passing" time="1.175" />
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_timeout_then_fails" time="1.960" />
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_executed_then_stripped_out" time="1.143" />
+        <testcase classname="tests.test_nb_run.TestNotebookRun" name="test_when_unknown_kernel_then_error" time="0.228" />
+    </testsuite>
+</testsuites>
